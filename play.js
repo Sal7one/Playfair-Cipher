@@ -26,16 +26,20 @@ const ALPHABET = [
     'z',
 ]
 
-let plainText = "Some Text a"
+let plainText = "hello"
 let cipherText = ""
-let key = "Ahmedo"
+let key = "Ahmed"
 let grid = null
 let placeHolderLetter = "x"
 let gridElm = document.querySelector("#grid");
 let keyElm = document.querySelector("#key");
 let plainTextElm = document.querySelector("#plain");
 let cipherTextElm = document.querySelector("#cipher");
+let playfairkeyInput = document.querySelector("#playfairkey")
+let plainTextInput = document.querySelector("#plainText")
 
+playfairkeyInput.addEventListener("input", rebuildUI)
+plainTextInput.addEventListener("input", rebuildUI)
 function generateGrid(key) {
 
     let uniqueKeyArray = new Set()
@@ -89,11 +93,11 @@ for (var i = 0, charsLength = plainTextWithoutSpace.length; i < charsLength; i +
 // If Last element is one letter add X to it
 let lastChunck = chunks[chunks.length-1];
 if(lastChunck.length == 1){
-    chunks[chunks.length-1] = lastChunck + "x"
+    chunks[chunks.length-1] = lastChunck + placeHolderLetter// usually "x"
 }
 
-console.log(grid)
-console.log(chunks)
+let cipherTextBuilder = ""
+
 chunks.forEach(letterCombo => {
     let firstLetter = letterCombo[0]
     let secondLetter = letterCombo[1]
@@ -119,24 +123,56 @@ chunks.forEach(letterCombo => {
         }
     }
 
-    console.log(`First Letter: ${firstLetter}, Row: ${firstLetterRow} Column: ${firstLetterColumn}`)
-    console.log(`Second Letter: ${secondLetter}, Row: ${secondLetterRow} Column: ${secondLetterColumn}`)
+    // incremant by one and if needed overflow to 0 if max is reached (5) 
     if(firstLetterRow == secondLetterRow){
-
+        if(++firstLetterColumn == 5){
+            firstLetterColumn = 0;
+        }
+        
+        if(++secondLetterColumn == 5){
+            secondLetterColumn = 0;
+        }
     }else if(firstLetterColumn == secondLetterColumn){
 
+        if(++firstLetterRow == 5){
+            firstLetterRow = 0;
+        }
+        
+        if(++secondLetterRow == 5){
+            secondLetterRow = 0;
+        }
+    }else{
+        console.log(firstLetter)
+        console.log(secondLetter)
+        let temp =  firstLetterColumn
+        firstLetterColumn = secondLetterColumn
+        secondLetterColumn = temp
     }
+
+    cipherTextBuilder += grid[firstLetterRow][firstLetterColumn] 
+    cipherTextBuilder += grid[secondLetterRow][secondLetterColumn] 
 });
+
+return cipherTextBuilder;
 
 }
 
+function rebuildUI(){
+
+    key = playfairkeyInput.value;
+    plainText = plainTextInput.value;
 // Generate grid
 generateGrid(key)
 
-// Key 
-keyElm.innerHTML += " " + key
-plainTextElm.innerHTML += " " + plainText
+if(plainText != null){
 
+keyElm.innerHTML = " " + key
+plainTextElm.innerHTML = " " + plainText
 
-encrypt(plainText, grid)
-cipherTextElm.innerHTML += " " + cipherText
+cipherText = encrypt(plainText, grid)
+cipherTextElm.innerHTML = " " + cipherText
+}
+
+}
+
+rebuildUI()

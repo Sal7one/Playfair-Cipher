@@ -104,3 +104,13 @@ body {
     width: 30px;
     cursor: pointer;
   }
+
+  .inputs{
+    display: block;
+    padding: 10px;
+
+  }
+  .inputs > input{
+    margin-bottom: 10px;
+    display: block;
+  }
