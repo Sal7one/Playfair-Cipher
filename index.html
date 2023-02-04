@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -12,28 +11,30 @@
 </head>
 <body>
 
-
-
     <div class="container">
-        <div class="inputs">
-            <label for="playfairkey">Play Fair Key</label>
-            <input id="playfairkey" type="text" name="playfairkey">
-            <label for="plainText">Plain Text</label>
-            <input id="plainText" type="text" name="plainText">
+        <div class="results">
+            <div class="inputs">
+                <label for="playfairkey">Play Fair Key</label>
+                <input id="playfairkey" type="text" name="playfairkey">
+                <label for="plainText">Plain Text</label>
+                <input id="plainText" type="text" name="plainText">
+            </div>
+            <div class="output">
+                <h2 id="key" class="subtitle" > </h2>
+                <h2 id="plain" class="subtitle" > </h2>
+                <h2 id="plainArray" ></h2>
+                <h2 id="cipher"  class="subtitle" > </h2>
+                <h2 id="cipherArray" ></h2>
+            </div>
         </div>
+
+    <div class="mid">
         <h2 class="subtitle" >Letter Grid</h2>
+        <div id="grid"></div>
+    </div>
+
     
-    <div id="grid"></div>
-
-    <div class="output">
-        <h2 class="subtitle" >Key: <span id="key" ></span> </h2>
-        <h2 class="subtitle" >Plain Text: <span id="plain" ></span> </h2>
-        <span id="plainArray" ></span>
-        <h2 class="subtitle" >Cipher Text: <span id="cipher" ></span> </h2>
-        <span id="cipherArray" ></span>
     </div>
-    </div>
-
 
     <script src="play.js"> </script>
 </body>

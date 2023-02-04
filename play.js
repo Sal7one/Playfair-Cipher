@@ -79,6 +79,16 @@ function buildLetterRow(arrayOfLetters) {
 
 function getChuncksOfString(plainTextWithoutSpace) {
 
+    	// Double letters to X
+	for (let index = 0; index < plainTextWithoutSpace.length; index++) {
+		let letters = plainTextWithoutSpace[index];
+        if(plainTextWithoutSpace.length != index+1)
+		if (letters[index] == letters[index+1]){
+        plainTextWithoutSpace[index + 1] = placeHolderLetter
+        }
+	}
+
+
 	let chunks = []
 
 	// Split into 2 pairs
@@ -91,19 +101,6 @@ function getChuncksOfString(plainTextWithoutSpace) {
 	if (lastChunck.length == 1) {
 		chunks[chunks.length - 1] = lastChunck + placeHolderLetter // usually "x"
 	}
-
-	// Check for double letter
-	console.log(chunks)
-
-	// Double letters to X
-	for (let index = 0; index < chunks.length; index++) {
-		let letters = chunks[index];
-
-		if (letters[0] == letters[1])
-			chunks[index] = letters[0] + placeHolderLetter
-
-	}
-	console.log(chunks)
 
 	return chunks;
 }
@@ -180,16 +177,14 @@ function rebuildUI() {
 
 	if (plainText != "") {
 
-		keyElm.innerHTML = " " + key
-		plainTextElm.innerHTML = " " + plainTextInput.value
+		keyElm.innerHTML = "Key: " + key
+		plainTextElm.innerHTML = "Plain Text: " + plainTextInput.value
 
 		document.querySelector("#plainArray").innerHTML = "[   " + getChuncksOfString(plainText).join(",   ") + " ]"
 
 		cipherText = encrypt(plainText, grid)
-		cipherTextElm.innerHTML = " " + cipherText
+		cipherTextElm.innerHTML = "Cipher Text " + cipherText.toUpperCase()
 		document.querySelector("#cipherArray").innerHTML = "[   " + getChuncksOfString(cipherText).join(",  ") + " ]"
 	}
-
 }
-
-rebuildUI()
+generateGrid("")
