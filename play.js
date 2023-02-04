@@ -76,6 +76,36 @@ function buildLetterRow(arrayOfLetters) {
   </div>`
 }
 
+function getChuncksOfString(plainTextWithoutSpace){
+
+let chunks = []
+
+// Split into 2 pairs
+for (var i = 0, charsLength = plainTextWithoutSpace.length; i < charsLength; i += 2) {
+    chunks.push(plainTextWithoutSpace.substring(i, i + 2));
+}
+
+// If Last element is one letter add X to it
+let lastChunck = chunks[chunks.length-1];
+if(lastChunck.length == 1){
+    chunks[chunks.length-1] = lastChunck + placeHolderLetter// usually "x"
+}
+
+// Check for double letter
+console.log(chunks)
+
+// Double letters to X
+for (let index = 0; index < chunks.length; index++) {
+    let letters = chunks[index];
+    
+    if(letters[0] == letters[1])
+        chunks[index] = letters[0] + placeHolderLetter
+    
+}
+console.log(chunks)
+
+return chunks;
+}
 
 // Encrypt 
 // Same row -> right 
@@ -84,21 +114,10 @@ function buildLetterRow(arrayOfLetters) {
 function encrypt(plainText, grid){
 
 let plainTextWithoutSpace = plainText.replaceAll(" ", "").toLowerCase()
-var chunks = [];
-for (var i = 0, charsLength = plainTextWithoutSpace.length; i < charsLength; i += 2) {
-    chunks.push(plainTextWithoutSpace.substring(i, i + 2));
-}
-
-
-// If Last element is one letter add X to it
-let lastChunck = chunks[chunks.length-1];
-if(lastChunck.length == 1){
-    chunks[chunks.length-1] = lastChunck + placeHolderLetter// usually "x"
-}
-
+let chunksOfWord = getChuncksOfString(plainTextWithoutSpace)
 let cipherTextBuilder = ""
 
-chunks.forEach(letterCombo => {
+chunksOfWord.forEach(letterCombo => {
     let firstLetter = letterCombo[0]
     let secondLetter = letterCombo[1]
 
@@ -142,8 +161,6 @@ chunks.forEach(letterCombo => {
             secondLetterRow = 0;
         }
     }else{
-        console.log(firstLetter)
-        console.log(secondLetter)
         let temp =  firstLetterColumn
         firstLetterColumn = secondLetterColumn
         secondLetterColumn = temp
@@ -159,18 +176,21 @@ return cipherTextBuilder;
 
 function rebuildUI(){
 
-    key = playfairkeyInput.value;
-    plainText = plainTextInput.value;
+    key = playfairkeyInput.value.replaceAll(" ", "").toLowerCase();
+    plainText = plainTextInput.value.replaceAll(" ", "").toLowerCase();
 // Generate grid
 generateGrid(key)
 
-if(plainText != null){
+if(plainText != ""){
 
 keyElm.innerHTML = " " + key
-plainTextElm.innerHTML = " " + plainText
+plainTextElm.innerHTML = " " + plainTextInput.value
+
+document.querySelector("#plainArray").innerHTML = "[   " + getChuncksOfString(plainText).join(",   ") + " ]"
 
 cipherText = encrypt(plainText, grid)
 cipherTextElm.innerHTML = " " + cipherText
+document.querySelector("#cipherArray").innerHTML ="[   " + getChuncksOfString(cipherText).join(",  ") + " ]"
 }
 
 }
