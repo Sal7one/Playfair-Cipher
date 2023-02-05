@@ -79,21 +79,17 @@ function buildLetterRow(arrayOfLetters) {
 
 function getChuncksOfString(plainTextWithoutSpace) {
 
-    	// Double letters to X
-	for (let index = 0; index < plainTextWithoutSpace.length; index++) {
-		let letters = plainTextWithoutSpace[index];
-        if(plainTextWithoutSpace.length != index+1)
-		if (letters[index] == letters[index+1]){
-        plainTextWithoutSpace[index + 1] = placeHolderLetter
-        }
-	}
-
-
+    // Ex:“ba lx lo ox nx” ba|lx|lo|on
+    // KBNWNP PO
+    // KBNWNP PO
+    // KBNWNP SM
+    let ptws = plainTextWithoutSpace
+    
 	let chunks = []
 
 	// Split into 2 pairs
-	for (var i = 0, charsLength = plainTextWithoutSpace.length; i < charsLength; i += 2) {
-		chunks.push(plainTextWithoutSpace.substring(i, i + 2));
+	for (var i = 0, charsLength = ptws.length; i < charsLength; i += 2) {
+		chunks.push(ptws.substring(i, i + 2));
 	}
 
 	// If Last element is one letter add X to it
@@ -177,14 +173,14 @@ function rebuildUI() {
 
 	if (plainText != "") {
 
-		keyElm.innerHTML = "Key: " + key
-		plainTextElm.innerHTML = "Plain Text: " + plainTextInput.value
+		keyElm.innerHTML = "Key: " + `<span class="actualvalue"> ${playfairkeyInput.value} </span>`
+		plainTextElm.innerHTML = "Plain Text: " + `<span class="actualvalue"> ${plainTextInput.value} </span>`
 
-		document.querySelector("#plainArray").innerHTML = "[   " + getChuncksOfString(plainText).join(",   ") + " ]"
+		document.querySelector("#plainArray").innerHTML =  `<span class="actualvalue"> ${"[   " + getChuncksOfString(plainText).join(",   ") + " ]"} </span>` 
 
 		cipherText = encrypt(plainText, grid)
-		cipherTextElm.innerHTML = "Cipher Text " + cipherText.toUpperCase()
-		document.querySelector("#cipherArray").innerHTML = "[   " + getChuncksOfString(cipherText).join(",  ") + " ]"
+		cipherTextElm.innerHTML = "Cipher Text: " + `<span class="actualvalue"> ${cipherText.toUpperCase()} </span>`
+        document.querySelector("#cipherArray").innerHTML =  `<span class="actualvalue"> ${"[   " + getChuncksOfString(cipherText).join(",   ") + " ]"} </span>` 
 	}
 }
 generateGrid("")

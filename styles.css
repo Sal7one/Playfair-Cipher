@@ -52,7 +52,7 @@ body {
     align-content: center;
     justify-content: space-evenly;
     border-radius: 20px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
   }
@@ -116,5 +116,6 @@ body {
   }
 
 
-  .subtitle.array{
+  .actualvalue{
+    color: rgb(204, 19, 19);
   }
