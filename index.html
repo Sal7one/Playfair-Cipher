@@ -14,18 +14,24 @@
     <div class="container">
         <div class="results">
             <div class="inputs">
-                <label for="playfairkey">Play Fair Key</label>
-                <input id="playfairkey" type="text" name="playfairkey" value="Ahmed">
-                <label for="plainText">Plain Text</label>
-                <input id="plainText" type="text" name="plainText" value="Balloon">
+                <div class="inputcontainer">
+                    <h1>Playfair Cipher Tool</h1>
+                        <div class="form-control">
+                            <label>Playfair Key</label>
+                            <input type="text"  id="playfairkey" name="playfairkey" value="Ahmed" />
+                          </div>
+                      <div class="form-control">
+                        <label id="typeOfText"> Plain Text</label>
+                        <input  id="chiperPlain"name="plainText" value="Balloon" type="text" />
+                      </div>
+                
+                      <div class="form-control">
+                        <label><input type="radio" name="cryptoOp" id="encrypt" value="encrypt"  checked/>Encrypt</label>
+                        <label><input type="radio" name="cryptoOp" id="decrypt" value="decrypt" />Decrypt</label>
+                      </div>
+                  </div>
             </div>
-            <div class="output">
-                <h2 id="key" class="subtitle" > </h2>
-                <h2 id="plain" class="subtitle" > </h2>
-                <h2 id="plainArray" ></h2>
-                <h2 id="cipher"  class="subtitle" > </h2>
-                <h2 id="cipherArray" ></h2>
-            </div>
+
         </div>
 
     <div class="mid">
@@ -33,6 +39,13 @@
         <div id="grid"></div>
     </div>
 
+    <div class="output">
+        <h2 id="key" class="subtitle" > </h2>
+        <h2 id="plain" class="subtitle" > </h2>
+        <h2 id="plainArray" ></h2>
+        <h2 id="cipher"  class="subtitle" > </h2>
+        <h2 id="cipherArray" ></h2>
+    </div>
     
     </div>
 
