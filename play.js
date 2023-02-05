@@ -148,7 +148,7 @@ function encrypt(plainText, grid) {
             }
         }
 
-        // incremant by one and if needed overflow to 0 if max is reached (5) 
+        // incremant by one and if needed overflow to 0 if max is reached (4 real array) 5 overflow 
         if (firstLetterRow == secondLetterRow) {
             if (++firstLetterColumn == 5) {
                 firstLetterColumn = 0;
@@ -246,30 +246,32 @@ function decrypt(cipherText, grid) {
             }
         }
 
+		// 4 is the real array length 
         if (firstLetterRow == secondLetterRow) {
             if (--firstLetterColumn == -1) {
-                firstLetterColumn = 5;
+                firstLetterColumn = 4;
             }
 
             if (--secondLetterColumn == -1) {
-                secondLetterColumn = 5;
+                secondLetterColumn = 4;
             }
         } else if (firstLetterColumn == secondLetterColumn) {
 
             if (--firstLetterRow == -1) {
-                firstLetterRow = 5;
+                firstLetterRow = 4;
             }
 
             if (--secondLetterRow == -1) {
-                secondLetterRow = 5;
+                secondLetterRow = 4;
             }
         } else {
             let temp = firstLetterColumn
             firstLetterColumn = secondLetterColumn
             secondLetterColumn = temp
         }
-        PlainTextBuilder += grid[firstLetterRow][firstLetterColumn]
-        PlainTextBuilder += grid[secondLetterRow][secondLetterColumn]
+
+			PlainTextBuilder += grid[firstLetterRow][firstLetterColumn]
+			PlainTextBuilder += grid[secondLetterRow][secondLetterColumn]
     });
 
     return PlainTextBuilder;
