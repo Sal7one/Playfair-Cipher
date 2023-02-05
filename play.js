@@ -124,7 +124,7 @@ function getChuncksOfString(plainTextWithoutSpace) {
 // Digonale -> switch
 function encrypt(plainText, grid) {
 
-    let plainTextWithoutSpace = plainText.replaceAll(" ", "").toLowerCase()
+    let plainTextWithoutSpace = plainText.replaceAll(" ", "").replaceAll("j", "i").toLowerCase()
     let chunksOfWord = getChuncksOfString(plainTextWithoutSpace)
     let cipherTextBuilder = ""
 
