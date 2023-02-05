@@ -79,11 +79,29 @@ function buildLetterRow(arrayOfLetters) {
 
 function getChuncksOfString(plainTextWithoutSpace) {
 
-    // Ex:“ba lx lo ox nx” ba|lx|lo|on
+    // Ex:“Balloon” ba|lx|lo|on
     // KBNWNP PO
     // KBNWNP PO
     // KBNWNP SM
-    let ptws = plainTextWithoutSpace
+
+	// MDNWNPYLWRMZ
+	// We're gonna build the new string without duplicates
+    let ptws = ""
+
+	for (let k = 0; k < plainTextWithoutSpace.length; k++) {
+		const currentLetter = plainTextWithoutSpace[k];
+		if(k + 1 != plainTextWithoutSpace.length){
+			let nextLetter = plainTextWithoutSpace[k + 1]
+			if(currentLetter == nextLetter){
+				ptws += currentLetter + placeHolderLetter
+			}else{
+				ptws += currentLetter + nextLetter
+				k++
+			}
+		}else{
+			ptws+=currentLetter
+		}
+	}
     
 	let chunks = []
 
@@ -183,4 +201,4 @@ function rebuildUI() {
         document.querySelector("#cipherArray").innerHTML =  `<span class="actualvalue"> ${"[   " + getChuncksOfString(cipherText).join(",   ") + " ]"} </span>` 
 	}
 }
-generateGrid("")
+rebuildUI()
