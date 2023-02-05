@@ -20,7 +20,7 @@ body {
     height: 50px;
     color: white;
     font-weight: bold;
-    background: teal;
+    background-color: teal;
     border:  black solid 2px
   }
 
@@ -88,10 +88,7 @@ body {
     font-family: 'Exo';
   }
   
-  .letter:active,
-  .dig:active {
-    background-color: #e6e6e6;
-  }
+  
   
   #call:hover {
     background-color: #81c784;
@@ -159,4 +156,11 @@ body {
   label span {
     font-size: 18px;
     margin-right: 8px;
+  }
+
+  #playbutton{
+    width: 60px;
+    background-color: turquoise;
+    border-radius: 15px;
+    margin-bottom: 7px;
   }

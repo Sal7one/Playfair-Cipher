@@ -296,17 +296,17 @@ function playRealTime(){
         // Set colors for new letters
         setTimeout(()=>{
             const cipherElements = globalCipherArray[index];
-            document.querySelector(`#${cipherElements[0]}`).style.background = "red"
-            document.querySelector(`#${cipherElements[1]}`).style.background = "red"
+            document.querySelector(`#${cipherElements[0]}`).style.backgroundColor = "red"
+            document.querySelector(`#${cipherElements[1]}`).style.backgroundColor = "red"
         
         setTimeout(()=>{
             const plainElements = globalPlainArray[index];
-            document.querySelector(`#${plainElements[0]}`).style.background = "gold"
-            document.querySelector(`#${plainElements[1]}`).style.background = "gold"
+            document.querySelector(`#${plainElements[0]}`).style.backgroundColor = "gold"
+            document.querySelector(`#${plainElements[1]}`).style.backgroundColor = "gold"
 
         setTimeout(()=>{
             letterBoxes.forEach(element => {
-                element.style.background = "teal"
+                element.style.backgroundColor = "teal"
             });
         }, 800)
         }, 700)
