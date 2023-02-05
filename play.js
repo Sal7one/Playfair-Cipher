@@ -39,7 +39,8 @@ let playfairkeyInput = document.querySelector("#playfairkey")
 let chiperPlainInput = document.querySelector("#chiperPlain")
 let encButton = document.querySelector("#encrypt")
 let decButton = document.querySelector("#decrypt")
-
+let globalPlainArray = []
+let globalCipherArray = []
 playfairkeyInput.addEventListener("input", rebuildUI)
 chiperPlainInput.addEventListener("input", rebuildUI)
 encButton.addEventListener("input", rebuildUI)
@@ -197,19 +198,23 @@ function rebuildUI() {
             plainTextElm.innerHTML = "Plain Text: " + `<span class="actualvalue"> ${chiperPlainInput.value} </span>`
             document.querySelector("#plainArray").innerHTML = `<span class="actualvalue"> ${"[   " + getChuncksOfString(chiperPlain).join(",   ") + " ]"} </span>`
             cipherText = encrypt(chiperPlain, grid)
+            globalPlainArray =  getChuncksOfString(chiperPlain)
+            globalCipherArray =  getChuncksOfString(cipherText)
             cipherTextElm.innerHTML = "Cipher Text: " + `<span class="actualvalue"> ${cipherText.toUpperCase()} </span>`
             document.querySelector("#cipherArray").innerHTML = `<span class="actualvalue"> ${"[   " + getChuncksOfString(cipherText).join(",   ") + " ]"} </span>`
         } else if (decButton.checked) {
             label.innerHTML = "Cipher Text"
-
             plainTextElm.innerHTML = "Cipher Text: " + `<span class="actualvalue"> ${chiperPlainInput.value} </span>`
             document.querySelector("#plainArray").innerHTML = ``
             cipherText = decrypt(chiperPlain, grid)
             cipherTextElm.innerHTML = "Plain Text: " + `<span class="actualvalue"> ${cipherText.toUpperCase()} </span>`
             document.querySelector("#cipherArray").innerHTML = ``
-
+            globalPlainArray =  getChuncksOfString(cipherText)
+            globalCipherArray =  getChuncksOfString(chiperPlain)
         }
 
+        // We Can play how it happend
+        document.querySelector(".playdiv").style.display = "block"
     }
 }
 
@@ -276,4 +281,40 @@ function decrypt(cipherText, grid) {
 
     return PlainTextBuilder;
 }
+
+document.querySelector("#playbutton").addEventListener("click", playRealTime)
+
+function playRealTime(){
+
+    if(globalPlainArray.length == 0 || globalCipherArray.length == 0)
+    alert("You need to Encrypt or Decrypt first")
+
+    let letterBoxes = document.querySelectorAll(".letter")
+    let timeout = 1000;
+    for (let index = 0; index < globalPlainArray.length; index++) {
+        // Reset colors
+        // Set colors for new letters
+        setTimeout(()=>{
+            const cipherElements = globalCipherArray[index];
+            document.querySelector(`#${cipherElements[0]}`).style.background = "red"
+            document.querySelector(`#${cipherElements[1]}`).style.background = "red"
+        
+        setTimeout(()=>{
+            const plainElements = globalPlainArray[index];
+            document.querySelector(`#${plainElements[0]}`).style.background = "gold"
+            document.querySelector(`#${plainElements[1]}`).style.background = "gold"
+
+        setTimeout(()=>{
+            letterBoxes.forEach(element => {
+                element.style.background = "teal"
+            });
+        }, 800)
+        }, 700)
+ 
+        },timeout)
+
+        timeout+=2800;
+    }
+}
 rebuildUI()
+

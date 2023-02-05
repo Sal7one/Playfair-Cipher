@@ -20,7 +20,7 @@ body {
     height: 50px;
     color: white;
     font-weight: bold;
-    background-color: teal;
+    background: teal;
     border:  black solid 2px
   }
 
