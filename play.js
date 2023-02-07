@@ -298,15 +298,17 @@ function playRealTime(){
         // Set colors for new letters
 
         // If We are encrypting we show the two letters first
-        if(encButton.checked){
-            firstLettersToShowColor = globalPlainArray[index];
-            secondLettersToShowColor  = globalCipherArray[index];
-        }else{
-            firstLettersToShowColor = globalCipherArray[index];
-            secondLettersToShowColor  = globalPlainArray[index];
-        }
+
 
         setTimeout(()=>{
+
+            if(encButton.checked){
+                firstLettersToShowColor = globalPlainArray[index];
+                secondLettersToShowColor  = globalCipherArray[index];
+            }else{
+                firstLettersToShowColor = globalCipherArray[index];
+                secondLettersToShowColor  = globalPlainArray[index];
+            }
     
             document.querySelector(`#${firstLettersToShowColor[0]}`).style.backgroundColor = "red"
             document.querySelector(`#${firstLettersToShowColor[1]}`).style.backgroundColor = "red"
