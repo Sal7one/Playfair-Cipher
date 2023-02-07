@@ -48,13 +48,10 @@ decButton.addEventListener("input", rebuildUI)
 
 function generateGrid(key) {
 
-    let uniqueKeyArray = new Set()
-
-    // Build unqiue matrix
-    for (let i = 0; i < key.length; i++)
-        uniqueKeyArray.add(key[i].toLowerCase())
-
-    let uniqueMatrix = Array.from(new Set([...uniqueKeyArray, ...alphabet]))
+                                // Replace all non charchaters
+    let keyCleaned = key.replaceAll(/[^A-Za-z]/gi, "").replaceAll("j", "i").toLowerCase();
+    let arrayOfCharacters = keyCleaned.split("");
+    let uniqueMatrix = Array.from(new Set([...arrayOfCharacters, ...alphabet]))
 
     let splittedArray = []
     while (uniqueMatrix.length) {
@@ -286,23 +283,37 @@ document.querySelector("#playbutton").addEventListener("click", playRealTime)
 
 function playRealTime(){
 
-    if(globalPlainArray.length == 0 || globalCipherArray.length == 0)
-    alert("You need to Encrypt or Decrypt first")
+    if(globalPlainArray.length == 0 || globalCipherArray.length == 0){
+        alert("You need to Encrypt or Decrypt first")
+        return
+    }
 
     let letterBoxes = document.querySelectorAll(".letter")
     let timeout = 1000;
+
+    let firstLettersToShowColor = []
+    let secondLettersToShowColor = []
     for (let index = 0; index < globalPlainArray.length; index++) {
         // Reset colors
         // Set colors for new letters
+
+        // If We are encrypting we show the two letters first
+        if(encButton.checked){
+            firstLettersToShowColor = globalPlainArray[index];
+            secondLettersToShowColor  = globalCipherArray[index];
+        }else{
+            firstLettersToShowColor = globalCipherArray[index];
+            secondLettersToShowColor  = globalPlainArray[index];
+        }
+
         setTimeout(()=>{
-            const cipherElements = globalCipherArray[index];
-            document.querySelector(`#${cipherElements[0]}`).style.backgroundColor = "red"
-            document.querySelector(`#${cipherElements[1]}`).style.backgroundColor = "red"
+    
+            document.querySelector(`#${firstLettersToShowColor[0]}`).style.backgroundColor = "red"
+            document.querySelector(`#${firstLettersToShowColor[1]}`).style.backgroundColor = "red"
         
         setTimeout(()=>{
-            const plainElements = globalPlainArray[index];
-            document.querySelector(`#${plainElements[0]}`).style.backgroundColor = "gold"
-            document.querySelector(`#${plainElements[1]}`).style.backgroundColor = "gold"
+            document.querySelector(`#${secondLettersToShowColor[0]}`).style.backgroundColor = "gold"
+            document.querySelector(`#${secondLettersToShowColor[1]}`).style.backgroundColor = "gold"
 
         setTimeout(()=>{
             letterBoxes.forEach(element => {
