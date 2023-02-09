@@ -1,5 +1,5 @@
-# Playfair Ciphre
-
+# Playfair Ciphre  
+### <p> <a href="https://sal7one.github.io/Playfair-Cipher" > Try now <a/> </p>
 
 
 1 – We first take the Playfair key from the user and generate the grid
