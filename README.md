@@ -1,4 +1,4 @@
-# Playfair Ciphre  
+# Playfair Cipher  
 ### <p> <a href="https://sal7one.github.io/Playfair-Cipher" > Try now <a/> </p>
 
 
